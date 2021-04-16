@@ -1,6 +1,10 @@
-# Phala ERC20
+# Prelaunch for Apron
 
-The contract has been deployed at [0x6c5ba91642f10282b576d91922ae6448c9d52f4e](https://etherscan.io/address/0x6c5ba91642f10282b576d91922ae6448c9d52f4e).
+# Apron ERC20
+
+The contract has been deployed at [0x](https://etherscan.io/address/0x).
+
+# Prerequisites
 
 ## Install dependencies
 
