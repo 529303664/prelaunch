@@ -305,7 +305,7 @@ function App() {
           {/*    <a href="mailto:hey-from-homepage@antpaw.org">Email</a>*/}
           {/*  </li>*/}
           {/*</ul>*/}
-          
+
           {accounts.length >= 1 && (
             <>
               <Row style={{marginBottom: '20px'}}>
@@ -352,7 +352,7 @@ function App() {
 
               <section style={{marginTop: '20px', marginBottom: '15px'}}>
                 <Row>
-                  <Button
+                  <Button className='claimBtn'
                     onClick={claim} size='medium' style={width100}
                     loading={showSending} disabled={selectedAirdrop < 0}>
                       {t('Claim')}

@@ -63,7 +63,7 @@ a{
     justify-content: space-between;
     width: 100%;
 }
-section.jsx-931126289{
+section{
     width: 100%;
 }
 .topRht{
@@ -89,6 +89,15 @@ section.jsx-931126289{
 }
 main{
     padding: 0!important;
+}
+.content{
+    font-size: 14px!important;
+}
+.claimBtn{
+    background: #000!important;
+    border-radius: 0!important;
+    color: #ffffff!important;
+    font-weight: bold;
 }
 
 @media (prefers-reduced-motion: no-preference) {
