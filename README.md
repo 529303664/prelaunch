@@ -26,7 +26,7 @@ truffle migrate --network mainnet
 truffle run verify PHAToken --network mainnet
 ```
 
-## Approve MultiSend.co
+## Aprove Airdrop
 
 ```bash
 truffle console --network mainnet
@@ -41,6 +41,13 @@ UNIT = new web3.utils.BN('1000000000000000000')
 await pha.approve(airdrop.address, UNIT.muln(10000))
 ```
 
+## Approve MultiSend.co
+
+```bash
+truffle console --network mainnet
+```
+
+Then in the console:
 ```js
 pha = await PHAToken.deployed()
 UNIT = new web3.utils.BN('1000000000000000000')
