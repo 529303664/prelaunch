@@ -66,6 +66,9 @@ async function getAirdropPlan(uri) {
 async function getAirdropLists(contract) {
   console.log('### 1');
   const numAirdrop = await contract.methods.airdropsCount().call();
+
+  console.log('Drop number : ', numAirdrop);
+
   const uriPromises = []
   console.log('### 2');
   for (let i = 1; i <= numAirdrop; i++) {
