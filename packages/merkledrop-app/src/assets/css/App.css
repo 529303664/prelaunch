@@ -1,0 +1,135 @@
+@font-face {
+    font-family: "Monda";
+    src: url('./fonts/Monda-Regular.woff2') format("woff2"), url('./fonts/Monda-Regular.woff') format("woff"), url('./fonts/Monda-Regular.ttf') format("truetype");
+    font-weight: normal;
+    font-style: normal
+}
+
+@font-face {
+    font-family: "MondaBold";
+    src: url('fonts/Monda-Bold.woff2') format("woff2"), url('fonts/Monda-Bold.woff') format("woff"), url('fonts/Monda-Bold.ttf') format("truetype");
+    font-weight: bold;
+    font-style: normal
+}
+
+html, body {
+    background: url("../images/bg.gif") !important;
+    font-family: "Monda", Verdana, sans-serif !important;
+}
+p, small{
+    font-family: "Monda", Verdana, sans-serif !important;
+}
+ul,li{
+    padding: 0!important;
+    margin: 0!important;
+    list-style: none;
+}
+ul li:before{
+    content: ''!important;
+}
+a{
+    color: #111!important;
+    text-decoration: underline!important;
+}
+.App {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 1em;
+    box-sizing: border-box;
+}
+
+.my-name {
+    margin-bottom: 0.5rem;
+    font-size: 3em;
+    font-weight: bold;
+}
+.main-description {
+    font-size: 1.25em;
+    margin-bottom: 3rem;
+    line-height: 1.7;
+    max-width: 510px;
+    padding-right: 2em;
+}
+.logoImg {
+    width: 194px;
+}
+
+.App-logo {
+    height: 40vmin;
+    pointer-events: none;
+}
+.topFlex{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+section.jsx-931126289{
+    width: 100%;
+}
+.topRht{
+    vertical-align: top;
+    text-decoration: underline;
+    cursor: pointer;
+    font-family: "MondaBold", Verdana, sans-serif !important;
+}
+.topRht:hover{
+    color: blue;
+
+}
+.topRht svg{
+    vertical-align: top;
+    width: 18px;
+    margin-right: 10px;
+}
+
+
+.link-list {
+    font-size: 1.25em;
+    margin-bottom: 1rem;
+}
+main{
+    padding: 0!important;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .App-logo {
+        animation: App-logo-spin infinite 20s linear;
+    }
+}
+
+.App-header {
+    background-color: #282c34;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+.links a {
+    margin-right: 15px;
+}
+
+.text-wrap-all {
+    word-break: break-all;
+    overflow-wrap: anywhere;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+
+
+

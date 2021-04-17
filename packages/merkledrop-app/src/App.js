@@ -4,13 +4,14 @@ import * as Icon from '@geist-ui/react-icons'
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import pAny from 'p-any';
+import logo from './assets/images/logo.png'
 // import '@zeit-ui/themes/index.css'
 import { combineProofs } from '@phala/merkledrop-lib';
 
 import Web3 from "web3";
 import Web3Modal from "web3modal";
 
-import './App.css';
+import './assets/css/App.css';
 import { network, etherscanBase, loadMerkleAirdropContract } from './contracts';
 
 const NETWORK = network;
@@ -98,7 +99,7 @@ function App() {
   const [airdrop, setAirdrop] = useState(null);
   const [plans, setPlans] = useState([]);
   // notconnected, loading, ready
-  const [state, setState] = useState('notconnected');  
+  const [state, setState] = useState('notconnected');
 
   async function connectWeb3() {
     setState('notconnected');
@@ -266,20 +267,42 @@ function App() {
       {NETWORK !== 'mainnet' && <Card type='warning'><h4>Now on {NETWORK}, not mainnet</h4></Card>}
       <Page>
         <Page.Header>
-          <Text h3 style={{marginTop: '15px'}}>PHA {t('Award Claim')}</Text>
-          <Text small className='links'>
-            <Link href='https://phala.network/' color>Home</Link>
-            <Link href='https://t.me/phalanetwork' color>Telegram</Link>
-          </Text>
+          <div className='topFlex'>
+            <div>
+              <div className='logoImg'><img src={logo} alt=""/></div>
+              <Text h3 style={{marginTop: '15px'}} className='my-name'>Apron Network</Text>
+              <p className="main-description">A decentralized platform that provides infrastructure services for DApp developers,DApp users,and operators..</p>
+            </div>
+            <div>
+              {!provider && <span onClick={connectWeb3} className='topRht'> <Icon.LogIn />{t('Connect Wallet')}</span>}
+              {provider && <span onClick={disconnectWeb3}  className='topRht'><Icon.LogOut />{t('Disconnect Wallet')}</span>}
+            </div>
+          </div>
+
         </Page.Header>
-        
+
         <Page.Content>
 
-          <Row style={{marginBottom: '25px'}}>
-            {!provider && <Button icon={<Icon.LogIn />} size='medium' onClick={connectWeb3} style={width100}>{t('Connect Wallet')}</Button>}
-            {provider && <Button icon={<Icon.LogOut />} size='medium' onClick={disconnectWeb3} style={width100}>{t('Disconnect Wallet')}</Button>}
-          </Row>
+          {/*<Row style={{marginBottom: '25px'}}>*/}
+          {/*  {!provider && <Button icon={<Icon.LogIn />} size='medium' onClick={connectWeb3} style={width100}>{t('Connect Wallet')}</Button>}*/}
+          {/*  {provider && <Button icon={<Icon.LogOut />} size='medium' onClick={disconnectWeb3} style={width100}>{t('Disconnect Wallet')}</Button>}*/}
+          {/*</Row>*/}
 
+          {/*<ul className="link-list">*/}
+          {/*  <li>*/}
+          {/*    <a href="https://www.twitter.com/antpaw">Twitter</a>*/}
+          {/*  </li>*/}
+          {/*  <li>*/}
+          {/*    <a href="https://www.dribbble.com/antpaw">Dribbble</a>*/}
+          {/*  </li>*/}
+          {/*  <li>*/}
+          {/*    <a href="https://www.github.com/antpaw">GitHub</a>*/}
+          {/*  </li>*/}
+          {/*  <li>*/}
+          {/*    <a href="mailto:hey-from-homepage@antpaw.org">Email</a>*/}
+          {/*  </li>*/}
+          {/*</ul>*/}
+          
           {accounts.length >= 1 && (
             <>
               <Row style={{marginBottom: '20px'}}>
@@ -362,7 +385,7 @@ function App() {
               )}
             </>
           )}
-          
+
         </Page.Content>
       </Page>
     </div>
