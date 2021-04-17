@@ -6,7 +6,7 @@ import axios from 'axios';
 import pAny from 'p-any';
 import logo from './assets/images/logo.png'
 // import '@zeit-ui/themes/index.css'
-import { combineProofs } from '@phala/merkledrop-lib';
+import { combineProofs } from '@apron/merkledrop-lib';
 
 import Web3 from "web3";
 import Web3Modal from "web3modal";
