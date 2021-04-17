@@ -1,5 +1,5 @@
 const Web3 = require('web3');
-const TrezorProvider = require("@phala/trezor-provider");
+const TrezorProvider = require("@apron/trezor-provider");
 
 const contract_consts = require('./contract_consts');
 

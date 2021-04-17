@@ -21,7 +21,7 @@
 require('dotenv').config()
 
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const TrezorProvider = require("@phala/trezor-provider");
+const TrezorProvider = require("@apron/trezor-provider");
 const keys = {
   api: process.env.INFURA,
   kovan: process.env.KOVAN_KEY,

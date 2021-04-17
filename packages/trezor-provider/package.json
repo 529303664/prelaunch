@@ -1,5 +1,5 @@
 {
-  "name": "@phala/trezor-provider",
+  "name": "@apron/trezor-provider",
   "description": "HD Wallet-enabled Web3 provider",
   "license": "MIT",
   "author": "Tim Coulter <tim@trufflesuite.com>",

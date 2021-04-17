@@ -8,7 +8,7 @@ require('dotenv').config()
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
 const pinataSDK = require('@pinata/sdk');
-const { merklize, toMaterializable } = require('@phala/merkledrop-lib');
+const { merklize, toMaterializable } = require('@apron/merkledrop-lib');
 
 const MerkleAirdrop = artifacts.require('MerkleAirdrop');
 const PHAToken = artifacts.require('PHAToken');

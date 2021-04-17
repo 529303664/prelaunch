@@ -4,7 +4,7 @@ const MerkleAirdrop = artifacts.require('MerkleAirdrop');
 const PHAToken = artifacts.require('PHAToken');
 const BN = web3.utils.BN;
 
-const {combineProofs, merklize} = require('@phala/merkledrop-lib');
+const {combineProofs, merklize} = require('@apron/merkledrop-lib');
 
 const bn1e18 = new BN('1000000000000000000');
 
