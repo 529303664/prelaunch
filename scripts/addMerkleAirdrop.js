@@ -11,7 +11,7 @@ const pinataSDK = require('@pinata/sdk');
 const { merklize, toMaterializable } = require('@apron/merkledrop-lib');
 
 const MerkleAirdrop = artifacts.require('MerkleAirdrop');
-const PHAToken = artifacts.require('PHAToken');
+const Token = artifacts.require('PHAToken');
 
 const dryrun = parseInt(process.env.DRYRUN || '1');
 const workdir = process.env.WORKDIR;
@@ -20,17 +20,20 @@ const pinataKey = process.env.PINATA_KEY;
 // const network = process.env.NETWORK || 'mainnet';
 
 const csvFile = `${workdir}/inputs.csv`;
+
+
+
 const outJson = `${workdir}/plan.json`;
 const outManifest = `${workdir}/manifest.json`;
 
 // const constants = {
 //     mainnet: {
 //         root: '0xb7687A5a3E7b49522705833Bf7D5bAf18AaBDD2d',
-//         phaTokenAddress: '0x6c5ba91642f10282b576d91922ae6448c9d52f4e',
+//         tokenAddress: '0x6c5ba91642f10282b576d91922ae6448c9d52f4e',
 //     },
 //     kovan: {
 //         root: '0xb7687A5a3E7b49522705833Bf7D5bAf18AaBDD2d',
-//         phaTokenAddress: '0x6c5ba91642f10282b576d91922ae6448c9d52f4e',
+//         tokenAddress: '0x6c5ba91642f10282b576d91922ae6448c9d52f4e',
 //     }
 // };
 // const netConsts = constants[network];
@@ -62,7 +65,7 @@ async function main () {
 
     const pinata = await initPinata();
     const drop = await MerkleAirdrop.deployed();
-    const pha = await PHAToken.deployed();
+    const token = await Token.deployed();
     const [account] = await web3.eth.getAccounts();
 
     const curDrops = await drop.airdropsCount();
@@ -113,7 +116,7 @@ async function main () {
         manifest
     });
 
-    const remainingAllowance = await pha.allowance(account, drop.address);
+    const remainingAllowance = await token.allowance(account, drop.address);
     const remaining = parseFloat(web3.utils.fromWei(remainingAllowance));
     if (remaining <= total) {
         console.error(`Insufficient allowance (${remaining} <= ${total}). Exiting...`);
