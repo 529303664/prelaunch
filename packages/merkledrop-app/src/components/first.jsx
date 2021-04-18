@@ -62,7 +62,12 @@ export  default  class LogoGather extends React.Component {
     };
     connect = () =>{
         this.onMouseLeave();
-
+        setTimeout( () =>{
+            this.setState({
+                contentShow:true,
+                styleShow:true
+            })
+        },1000)
     }
     onReset = ()=>{
         this.updateTweenData()
@@ -72,7 +77,6 @@ export  default  class LogoGather extends React.Component {
         })
         setTimeout(()=>{
             this.setState({
-
                 contentShow:false,
             })
         },1000)
@@ -85,12 +89,7 @@ export  default  class LogoGather extends React.Component {
         this.updateTweenData();
         // this.interval = ticker.interval(this.updateTweenData, this.intervalTime);
         // this.onMouseLeave = null
-        setTimeout( () =>{
-            this.setState({
-                contentShow:true,
-                styleShow:true
-            })
-        },1000)
+
 
     };
 

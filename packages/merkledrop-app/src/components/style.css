@@ -1,4 +1,3 @@
-
 .logo-gather-demo-wrapper {
     position: relative;
     background: #000;
@@ -108,22 +107,43 @@
     cursor: pointer;
 }
 .bgBrdr{
-    background: #f00;
     color: #ffffff;
-
     z-index: 99999999;
 
     display: inline-block;
     overflow: hidden;
 
-    width: 1000px;
-    height: 550px;
+    /*width: 1000px;*/
+    width: 80%;
+    height: 90%;
     position: absolute;
-    left: 50%;
-    bottom: 60px;
-    margin-left: -500px;
+    left: 10%;
+    bottom: 5%;
+    /*margin-left: -500px;*/
     overflow-y: auto;
 }
+
+.bgBrdr::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    border-radius: 10px;
+    background-color: #000;
+}
+
+.bgBrdr::-webkit-scrollbar
+{
+    width: 12px;
+    background-color: #000;
+}
+
+.bgBrdr::-webkit-scrollbar-thumb
+{
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #000;
+}
+
+
 .btm2Top{
     animation: wrapper-gradient 1s linear;
 }

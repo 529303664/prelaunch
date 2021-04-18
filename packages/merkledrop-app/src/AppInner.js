@@ -288,6 +288,9 @@ const AppInner = props => {
           <div className='topFlex'>
             <div>
               <Text h3 style={{marginTop: '15px'}} className='my-name'>Apron Network</Text>
+              <div className='main-description'>
+                A decentralized platform that provides infrastructure services for DApp developers,DApp users,and operators.A platform that provides infrastructure services for DApp developers,DApp users,and operators.A decentralized platform that provides infrastructure services for DApp developers,DApp users,and operators.
+              </div>
             </div>
             <div>
               {!provider && <span onClick={connectWeb3} className='topRht'> <Icon.LogIn />{t('Connect Wallet')}</span>}
@@ -299,13 +302,14 @@ const AppInner = props => {
 
         <Page.Content>
 
+          <Radio.Group className='radioGrop' value={selectedAirdrop} onChange={setSelectedAirdrop}>
 
           {accounts.length >= 1 && (
             <>
               <Row style={{marginBottom: '20px'}}>
                 <div className='ethTop'>
                   <Description title={t('ETH Account')} content={accounts[0]} className='text-wrap-all' />
-                  <div className='rht'> <span>{claimed}</span> claimed / <span>{total}</span> total</div>
+
                 </div>
 
               </Row>
@@ -314,10 +318,10 @@ const AppInner = props => {
               ? (
                 <>
                   <Row style={{marginBottom: '5px'}}>
-                    <Text span size="0.75rem" style={{fontWeight: 500}} type="secondary">{t('YOUR AWARDS')}</Text>
+                    <Text span size="0.75rem" style={{fontWeight: 500}} type="secondary">{t('YOUR AWARDS')} (<span>{claimed}</span> claimed / <span>{total}</span> total)</Text>
                   </Row>
-                  <Row style={{marginBottom: '20px'}}>
-                    <Radio.Group value={selectedAirdrop} onChange={setSelectedAirdrop}>
+                  <Row style={{marginBottom: '20px'}} className='listBrdr'>
+
                       {myAwards.map(award =>
                               (
                         !award.awarded && !award.paused && <Radio value={award.id} key={award.id} disabled={award.awarded || award.paused}>
@@ -329,10 +333,7 @@ const AppInner = props => {
                       )
 
                       )}
-                      <Radio value={0} disabled={!canClaimAll}>
-                        <span className='text-wrap-all'>{t('Claim all')}</span>
-                      </Radio>
-                    </Radio.Group>
+
                   </Row>
                 </>
               )
@@ -358,11 +359,14 @@ const AppInner = props => {
                     loading={showSending} disabled={selectedAirdrop < 0}>
                       {t('Claim')}
                   </Button>
+                    <Radio value={0} disabled={!canClaimAll} >
+                      <span className='text-wrap-all claimAll'>{t('Claim all')}</span>
+                    </Radio>
                 </Row>
               </section>
 
               {showSentTips && (
-                <Card type='dark'>
+                <Card type='secondary' className='rhtCard'>
                   <Description title={t('Transaction ID')} content={sentTx
                       ? (<Link href={etherscanTxLink(sentTx)} target='_blank' icon>{sentTx}</Link>)
                       : '(unknown)'
@@ -375,21 +379,21 @@ const AppInner = props => {
               )}
 
               {sentTxError && (
-                <Card type='error'>
+                <Card type='error' className='rhtCard'>
                   <h4>{t('Failed to send transaction')}</h4>
                   <p>{sentTxError}</p>
                 </Card>
               )}
 
               {otherError && (
-                <Card type='error'>
+                <Card type='error' className='rhtCard'>
                   <h4>{t('Error occurred')}</h4>
                   <p>{otherError}</p>
                 </Card>
               )}
             </>
           )}
-
+          </Radio.Group>
         </Page.Content>
       </Page>
     </div>
