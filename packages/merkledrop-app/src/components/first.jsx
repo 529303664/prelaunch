@@ -83,10 +83,10 @@ export  default  class LogoGather extends React.Component {
     }
     onMouseLeave = () => {
         // this.gather && this.updateTweenData();
-        // if (this.gather) {
-        //     this.updateTweenData();
-        // }
-        this.updateTweenData();
+        if (this.gather) {
+            this.updateTweenData();
+        }
+        // this.updateTweenData();
         // this.interval = ticker.interval(this.updateTweenData, this.intervalTime);
         // this.onMouseLeave = null
 
