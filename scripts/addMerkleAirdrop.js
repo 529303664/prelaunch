@@ -136,7 +136,9 @@ async function main () {
     const uri = '/ipfs/' + hash;
     console.log('Adding airdrop', {root: merklized.root, uri});
     const r = await drop.start(merklized.root, uri, {gas: 150000, gasPrice: 125 * 1e9, nonce: undefined});
-    console.log('Done', r);
+
+    const r2 = await drop.setPause(plan.id, true);
+    console.log('Done', r, r2);
 }
 
 
