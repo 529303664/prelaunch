@@ -35,10 +35,10 @@ truffle console --network mainnet
 Then in the console:
 
 ```js
-pha = await PHAToken.deployed()
-airdrop = await MerkleAirdrop.deployed()
-UNIT = new web3.utils.BN('1000000000000000000')
-await pha.approve(airdrop.address, UNIT.muln(10000))
+token = await ERC20Token.deployed();
+airdrop = await MerkleAirdrop.deployed();
+UNIT = new web3.utils.BN('1000000000000000000');
+await token.approve(airdrop.address, UNIT.muln(1000000));
 ```
 
 ## Approve MultiSend.co
