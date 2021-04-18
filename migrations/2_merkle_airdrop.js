@@ -1,5 +1,5 @@
 const MerkleAirdrop = artifacts.require("MerkleAirdrop");
-const Token = artifacts.require("PHAToken");
+const Token = artifacts.require("ERC20Token");
 
 module.exports = async function (deployer, network, accounts) {
 

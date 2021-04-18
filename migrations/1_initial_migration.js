@@ -1,5 +1,5 @@
 const Migrations = artifacts.require("Migrations");
-const Token = artifacts.require("PHAToken");
+const Token = artifacts.require("ERC20Token");
 const BN = web3.utils.BN;
 const UNIT = new BN('1000000000000000000');
 

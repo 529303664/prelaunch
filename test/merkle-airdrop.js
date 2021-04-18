@@ -1,7 +1,7 @@
 const truffleAssert = require('truffle-assertions');
 
 const MerkleAirdrop = artifacts.require('MerkleAirdrop');
-const PHAToken = artifacts.require('PHAToken');
+const ERC20Token = artifacts.require('ERC20Token');
 const BN = web3.utils.BN;
 
 const {combineProofs, merklize} = require('@apron/merkledrop-lib');
@@ -21,20 +21,20 @@ contract('MerkleAirdrop', accounts => {
   
     before(async () => {
         drop = await MerkleAirdrop.deployed();
-        pha = await PHAToken.deployed();
+        token = await ERC20Token.deployed();
         // prepare
-        await drop.setToken(pha.address, root);
-        await pha.approve(drop.address, bn1e18.muln(99999));
+        await drop.setToken(token.address, root);
+        await token.approve(drop.address, bn1e18.muln(99999));
         // add merkle airdrop
         testSetup = merklize(testData, 'address', 'amount');
-        await drop.start(testSetup.root, 'mock-data-uri');
+        await drop.start(testSetup.root, 'mock-data-uri', 0);
     });
 
-    it('should have enough PHA allowance', async () => {
+    it('should have enough ERC20 allowance', async () => {
         const bn0 = new BN(0);
         const [balance, allowance] = await Promise.all([
-            pha.balanceOf(root),
-            pha.allowance(root, drop.address)]);
+            token.balanceOf(root),
+            token.allowance(root, drop.address)]);
         assert(balance.gt(bn0));
         assert(allowance.gt(bn0));
     });
@@ -48,7 +48,7 @@ contract('MerkleAirdrop', accounts => {
             const award = testSetup.awards[i];
             const address = accounts[i+1];
             await drop.award(1, address, award.amountBN.toString(), award.proof);
-            const received = await pha.balanceOf(address);
+            const received = await token.balanceOf(address);
             assert(received.toString() == award.amountBN.toString());
         }
     });
@@ -63,8 +63,8 @@ contract('MerkleAirdrop', accounts => {
         const id1 = (await drop.airdropsCount()).toNumber() + 1;
         const id2 = id1 + 1;
 
-        await drop.start(setup1.root, 'mock-data-uri');
-        await drop.start(setup2.root, 'mock-data-uri');
+        await drop.start(setup1.root, 'mock-data-uri', 0);
+        await drop.start(setup2.root, 'mock-data-uri', 0);
 
         const curAirdropId = await drop.airdropsCount();
         assert(curAirdropId.eq(new BN(id2)), 'Airdrop count mismatch');
@@ -76,7 +76,7 @@ contract('MerkleAirdrop', accounts => {
             combinedProof, proofLengths
         );
 
-        const balanceBN = await pha.balanceOf(accounts[4]);
+        const balanceBN = await token.balanceOf(accounts[4]);
         assert(balanceBN.eq(bn1e18.muln(2)), 'Wrong amount from airdrop');
     });
 
@@ -92,13 +92,29 @@ contract('MerkleAirdrop', accounts => {
 
         await drop.setPause(1, false);
         await drop.award(1, address, award.amountBN.toString(), award.proof);
-        const received = await pha.balanceOf(address);
+        const received = await token.balanceOf(address);
         assert(received.toString() == award.amountBN.toString());
+    });
+
+    it('refuses to claim when locked', async () => {
+
+        const testData1 = [{ address: accounts[4], amount: 1 }, { address: accounts[5], amount: 1 }];
+        const setup1 = merklize(testData1, 'address', 'amount');
+        const id1 = (await drop.airdropsCount()).toNumber() + 1;
+
+        await drop.start(setup1.root, 'mock-data-uri', 500);
+
+        const award = setup1.awards[0];
+        const address = accounts[4];
+        await truffleAssert.reverts(
+            drop.award(id1, address, award.amountBN.toString(), award.proof),
+            "LOCKED"
+        );
     });
 
     it('refuses to change token without owner permission', async () => {
         await truffleAssert.reverts(
-            drop.setToken(pha.address, root, {from: accounts[1]}),
+            drop.setToken(token.address, root, {from: accounts[1]}),
             "Ownable: caller is not the owner");
     });
 
