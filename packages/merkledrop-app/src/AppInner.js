@@ -326,7 +326,7 @@ const AppInner = props => {
                               (
                         !award.awarded && !award.paused && <Radio value={award.id} key={award.id} disabled={award.awarded || award.paused}>
                           <span className='text-wrap-all'>
-                            #{award.id} - {award.amount} PHA {
+                            #{award.id} - {award.amount} APN {
                             award.awarded ? `(${t('claimed')})` : award.paused ? `(${t('unavailable')})` : ''}
                           </span>
                         </Radio>
