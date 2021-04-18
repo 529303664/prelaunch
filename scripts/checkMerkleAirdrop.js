@@ -12,7 +12,7 @@ const axios = require('axios');
 const { merklize, toMaterializable } = require('@apron/merkledrop-lib');
 
 const MerkleAirdrop = artifacts.require('MerkleAirdrop');
-const Token = artifacts.require('PHAToken');
+const Token = artifacts.require('ERC20Token');
 
 const workdir = process.env.WORKDIR;
 
@@ -34,7 +34,6 @@ function loadcsv(path) {
     })
 }
 
-
 async function agumentedIpfsGet(hash) {
     const promises = IPFS_BASES.map(ipfsBase => axios.get(`${ipfsBase}/${hash}`));
     if (Promise.any) {
@@ -48,9 +47,6 @@ async function agumentedIpfsGet(hash) {
 async function getAirdropPlan(uri) {
     const hash = uri.replace('/ipfs/', '');
     const resp = await agumentedIpfsGet(hash);
-
-    // console.log(resp.data);
-
     return resp.data;
 }
 
@@ -68,11 +64,24 @@ async function getAirdropLists(contract) {
     const airdrops = await Promise.all(uriPromises);
     console.log('airdrops', airdrops);
 
+
+    const unlockPromises = []
+    for (let i = 1; i <= numAirdrop; i++) {
+      unlockPromises.push(contract.methods.unlocked(i).call());
+    }
+    const unlocks = await Promise.all(unlockPromises);
+    console.log('unlocks', unlocks);
+
+    console.log(`airdrops len : ${airdrops.length}, unlocks len : ${unlocks.length}`);
+    if (unlocks.length === airdrops.length) {
+      
+    }
+
     const plans = await Promise.all(
         airdrops.map(a => getAirdropPlan(a.dataURI))
     );
     const plansWithStatus = plans.map((a, idx) => {
-        return { ...a, paused: airdrops[idx].paused };
+        return { ...a, paused: airdrops[idx].paused || unlocks[idx] };
     });
 
     console.log('plans', plansWithStatus);
@@ -89,8 +98,9 @@ async function main() {
         const drop = await MerkleAirdrop.deployed();
 
         const plansWithStatus = await getAirdropLists(drop.contract);
-        console.log(plansWithStatus);
-
+        const plansWithStatusJSON = JSON.stringify(plansWithStatus);
+        console.log(plansWithStatusJSON);
+        fs.writeFileSync(outPlansWithStatus, plansWithStatusJSON, { encoding: 'utf-8' });
 
         const pha = await Token.deployed();
         const [account] = await web3.eth.getAccounts();
@@ -117,11 +127,6 @@ async function main() {
             a.awarded = awarded[idx];
         });
         console.log(_myAwards);
-
-        // save plansWithStatusv
-        const plansWithStatusJSON = JSON.stringify(plansWithStatus);
-        console.log(plansWithStatusJSON);
-        fs.writeFileSync(outPlansWithStatus, plansWithStatusJSON, { encoding: 'utf-8' });
 
         console.log('Done');
     } catch (err) {

@@ -11,7 +11,7 @@ const pinataSDK = require('@pinata/sdk');
 const { merklize, toMaterializable } = require('@apron/merkledrop-lib');
 
 const MerkleAirdrop = artifacts.require('MerkleAirdrop');
-const Token = artifacts.require('PHAToken');
+const Token = artifacts.require('ERC20Token');
 
 const dryrun = parseInt(process.env.DRYRUN || '1');
 const workdir = process.env.WORKDIR;
@@ -135,10 +135,11 @@ async function main () {
 
     const uri = '/ipfs/' + hash;
     console.log('Adding airdrop', {root: merklized.root, uri});
-    const r = await drop.start(merklized.root, uri, {gas: 150000, gasPrice: 125 * 1e9, nonce: undefined});
+    const r = await drop.start(merklized.root, uri, 0, {gas: 150000, gasPrice: 125 * 1e9, nonce: undefined});
 
-    const r2 = await drop.setPause(plan.id, true);
-    console.log('Done', r, r2);
+    console.log('Done', r);
+    // const r2 = await drop.setPause(plan.id, true);
+    // console.log('Done', r, r2);
 }
 
 
