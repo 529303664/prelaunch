@@ -1,17 +1,32 @@
+require('dotenv').config();
+
+
 const Web3 = require('web3');
 const TrezorProvider = require("@apron/trezor-provider");
+const HDWalletProvider = require("@truffle/hdwallet-provider");
 
 const contract_consts = require('./contract_consts');
 
 const phaAddress = '0x6c5ba91642f10282b576d91922ae6448c9d52f4e';
-const keys = {
-    api: '7725a6756780467aa76228d52591d684'
-};
+// const keys = {
+//     api: '7725a6756780467aa76228d52591d684'
+// };
 
-const provider = new TrezorProvider(
-    `https://mainnet.infura.io/v3/${keys.api}`,
-    1, "m/44'/60'/0'/0/5"
-);
+// const provider = new TrezorProvider(
+//     `https://mainnet.infura.io/v3/${keys.api}`,
+//     1, "m/44'/60'/0'/0/5"
+// );
+
+const keys = {
+    api: process.env.INFURA,
+    kovan: process.env.KOVAN_KEY,
+  }
+  
+const provider = new HDWalletProvider(
+    keys.kovan,
+    `https://kovan.infura.io/v3/${keys.api}`,
+  );
+
 const web3 = new Web3(provider);
 
 const Multisend = new web3.eth.Contract(
