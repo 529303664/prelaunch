@@ -135,7 +135,12 @@ async function main () {
 
     const uri = '/ipfs/' + hash;
     console.log('Adding airdrop', {root: merklized.root, uri});
-    const r = await drop.start(merklized.root, uri, 0, {gas: 150000, gasPrice: 125 * 1e9, nonce: undefined});
+
+    const unlockEpoch = curDrops.toNumber() + 1; // fixme: 
+
+    console.log(`unlock epoch : ${unlockEpoch}`);
+
+    const r = await drop.start(merklized.root, uri, unlockEpoch, {gas: 210000, gasPrice: 125 * 1e9, nonce: undefined});
 
     console.log('Done', r);
     // const r2 = await drop.setPause(plan.id, true);

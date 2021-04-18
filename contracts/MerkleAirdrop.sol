@@ -363,9 +363,9 @@ contract MerkleAirdrop is Ownable {
 
     // start of the lockup period
     // Wednesday, April 21, 2021 15:00:00 PM UTC+8
-    uint256 constant LOCK_START = 1595609911;
+    uint256 constant LOCK_START = 1616774400;
     // length of time to delay first epoch
-    uint256 constant FIRST_EPOCH_DELAY = 30 days;
+    uint256 constant FIRST_EPOCH_DELAY = 21 days;
     // how long does an epoch last
     uint256 constant EPOCH_DURATION = 1 days;
     // number of epochs

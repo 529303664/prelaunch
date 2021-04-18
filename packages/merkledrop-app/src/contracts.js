@@ -6,7 +6,7 @@ const constants = {
   },
   kovan: {
     etherscanBase: 'https://kovan.etherscan.io',
-    airdropAddress: '0x1cf15aC8D36F3d590a8D8A95b209D42510998562'
+    airdropAddress: '0x5E0937aA552d4059410FBc8f165cBb68675E24Ff'
   }
 };
 
