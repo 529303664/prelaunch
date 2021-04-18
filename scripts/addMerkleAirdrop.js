@@ -3,7 +3,7 @@
 //  WORKDIR='./tmp/md1' DRYRUN=1 truffle exec ./scripts/addMerkleAirdrop.js --network kovan
 //  WORKDIR='./tmp/prod/md1' DRYRUN=1 truffle exec ./scripts/addMerkleAirdrop.js --network mainnet
 
-require('dotenv').config()
+require('dotenv').config();
 
 const fs = require('fs');
 const parse = require('csv-parse/lib/sync');
