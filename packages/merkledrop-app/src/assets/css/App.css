@@ -13,7 +13,9 @@
 }
 
 html, body {
-    background: url("../images/bg.gif") !important;
+    /*background: url("../images/bg.gif") !important;*/
+    background: #000 !important;
+    color: #ffffff !important;
     font-family: "Monda", Verdana, sans-serif !important;
 }
 p, small{
@@ -28,16 +30,21 @@ ul li:before{
     content: ''!important;
 }
 a{
-    color: #111!important;
+    color: #fff!important;
     text-decoration: underline!important;
 }
-.App {
-    width: 1000px;
-    margin: 0 auto;
-    padding: 1em;
-    box-sizing: border-box;
+dd{
+    color: #fff!important;
 }
-
+dt,span{
+    color: #ccc!important;
+}
+.point:before{
+    background-color: #fff!important;
+}
+.AppInner{
+    width: 100%;
+}
 .my-name {
     margin-bottom: 0.5rem;
     font-size: 3em;
@@ -64,7 +71,9 @@ a{
     width: 100%;
 }
 section{
-    width: 100%;
+    width: 960px!important;
+    padding: 0;
+    margin: 0;
 }
 .topRht{
     vertical-align: top;
@@ -73,7 +82,7 @@ section{
     font-family: "MondaBold", Verdana, sans-serif !important;
 }
 .topRht:hover{
-    color: blue;
+    color:rgba(255,255,255,0.7);
 
 }
 .topRht svg{
@@ -95,9 +104,22 @@ main{
 }
 .claimBtn{
     background: #000!important;
-    border-radius: 0!important;
-    color: #ffffff!important;
     font-weight: bold;
+
+
+    color: #ffffff!important;
+    z-index: 999;
+    border: 1px solid #fff;
+    border-radius: 4px;
+    width: 200px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    text-transform: uppercase!important;
+}
+.claimBtn:hover{
+    background: #fff!important;
+    color: #000000!important;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -139,6 +161,25 @@ main{
 }
 
 
+.card{
+    border: 1px solid #fff!important;
+}
+ul,.content{
+    /*background: #000;*/
+    /*border: 0;*/
+    /*border-radius: 4px;*/
+    color: #ffffff!important;
+}
 
-
-
+.ethTop{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+.ethTop .rht{
+    line-height: 2.2em;
+    color: #cccccc;
+}
+.ethTop .rht span{
+    color: #ffffff;
+}
