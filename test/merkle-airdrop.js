@@ -10,7 +10,7 @@ const bn1e18 = new BN('1000000000000000000');
 
 contract('MerkleAirdrop', accounts => {
     let drop;
-    let pha;
+    let token;
     let testSetup;
     const root = accounts[0];
     const testData = [

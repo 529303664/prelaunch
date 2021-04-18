@@ -102,7 +102,7 @@ async function main() {
         console.log(plansWithStatusJSON);
         fs.writeFileSync(outPlansWithStatus, plansWithStatusJSON, { encoding: 'utf-8' });
 
-        const pha = await Token.deployed();
+        const token = await Token.deployed();
         const [account] = await web3.eth.getAccounts();
 
         const curDrops = await drop.airdropsCount();
