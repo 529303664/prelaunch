@@ -90,7 +90,8 @@ module.exports = {
       gasPrice: 40000000000, // https://kovan.etherscan.io/chart/gasprice
       confirmations: 0,    // # of confs to wait between deployments. (default: 0)
       timeoutBlocks: 10,  // # of blocks before a deployment times out  (minimum/default: 50)
-      skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
+      skipDryRun: true,     // Skip dry run before migrations? (default: false for public nets )
+      networkCheckTimeout: 10000
     },
 
     // Useful for private networks
