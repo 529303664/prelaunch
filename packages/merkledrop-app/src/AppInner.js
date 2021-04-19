@@ -67,11 +67,22 @@ async function getAirdropLists(contract) {
   }
   const airdrops = await Promise.all(uriPromises);
   console.log('airdrops', airdrops);
+
+  const unlockPromises = []
+  console.log('### 3');
+  for (let i = 1; i <= numAirdrop; i++) {
+    unlockPromises.push(contract.methods.unlocked(i).call());
+  }
+  const unlocklist = await Promise.all(unlockPromises);
+  console.log('unlocklist', unlocklist);
+
+
+
   const plans = await Promise.all(
     airdrops.map(a => getAirdropPlan(a.dataURI))
   );
   const plansWithStatus = plans.map((a, idx) => {
-    return {...a, paused: airdrops[idx].paused};
+    return {...a, paused: airdrops[idx].paused,locked:unlocklist[idx]};
   });
 
   console.log('plans', plansWithStatus);
@@ -173,6 +184,7 @@ const AppInner = props => {
             ...award,
             id: plan.id,
             paused: plan.paused,
+            locked: plan.locked,
           })
         }
       }
@@ -186,21 +198,20 @@ const AppInner = props => {
     let total = 0;
     let claimed = 0;
     _myAwards.map(i=>{
-       total += parseInt(i.amount)
+       total += parseInt(i.amount);
       if(i.awarded){
         claimed += parseInt(i.amount)
       }
-
-    })
-    setTotal(total)
-    setclaimed(claimed)
-
+      return i;
+    });
+    setTotal(total);
+    setclaimed(claimed);
     setMyAwards(_myAwards);
     console.log({myAwards});
   }
   useEffect(() => {
     filterMyAwards();
-  }, [accounts, plans])
+  }, [accounts, plans])// eslint-disable-line react-hooks/exhaustive-deps
   useEffect(() => {
     connectWeb3();
   }, [])
@@ -324,7 +335,7 @@ const AppInner = props => {
 
                       {myAwards.map(award =>
                               (
-                        !award.awarded && !award.paused && <Radio value={award.id} key={award.id} disabled={award.awarded || award.paused}>
+                        !award.awarded && !award.paused && !award.locked && <Radio value={award.id} key={award.id} disabled={award.awarded || award.paused}>
                           <span className='text-wrap-all'>
                             #{award.id} - {award.amount} APN {
                             award.awarded ? `(${t('claimed')})` : award.paused ? `(${t('unavailable')})` : ''}

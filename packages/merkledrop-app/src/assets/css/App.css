@@ -228,6 +228,8 @@ ul,.content{
     /*bottom:20px;*/
     top:102px;
     width: 40%!important;
+    word-wrap: break-word;
+    word-break: normal;
 
 }
 .radioGrop{
